@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Routing;
 
 namespace CollegeDemo.Controllers
 {
@@ -12,53 +13,15 @@ namespace CollegeDemo.Controllers
     public class StudentController : ApiController
     {
 
-        // DELETE api/GoodStudent/5, to delete student 5
-        [Route("{id:int}")]
-        public void Delete(int id)
-        {
-            StudentRepository.GetInstance().Delete(id);
-        }
-
-
-        // PUT api/GoodStudent/3, to modify student 3
-        [Route("{id:int}")]
-        public void Put(int id, [FromBody]Student s)
-        {
-            StudentRepository.GetInstance().Update(id, s);
-        }
-
-
-
-        // POST api/GoodStudent, to create a new student
-        [Route("")]
-        public HttpResponseMessage Post([FromBody]Student s)
-        {
-            var result = StudentRepository.GetInstance().Add(s);
-            if (result != null)
-            {
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created);
-                response.Headers.Location = new Uri(Request.RequestUri + result.Id.ToString());
-                return response;
-            }
-            else
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "cannot create a new course");
-            }
-
-        }
-
         // Get api/GoodStudent/female
         // Get api/GoodStudent/male
         [Route("{gender}")]
         public HttpResponseMessage GetSameGenderStudents(string gender)
         {
             IEnumerable<Student> students = StudentRepository.GetInstance().GetAll();
-            List<Student> result = new List<Student>();
-            students.ToList().ForEach(x =>
-            {
-                if (x.Gender.Equals(gender, StringComparison.InvariantCultureIgnoreCase))
-                    result.Add(x);
-            });
+
+            var result = students.Where(x => { return x.Gender.Equals(gender, StringComparison.InvariantCultureIgnoreCase); });
+            
             var response = Request.CreateResponse<IEnumerable<Student>>(HttpStatusCode.OK, result);
             return response;
         }
@@ -109,10 +72,44 @@ namespace CollegeDemo.Controllers
         }
 
 
+
+
+
+        // DELETE api/GoodStudent/5, to delete student 5
         
+        [Route("{id:int}")]
+        public void Delete(int id)
+        {
+            StudentRepository.GetInstance().Delete(id);
+        }
+
+
+        // PUT api/GoodStudent/3, to modify student 3
+        [Route("{id:int}")]
+        public void Put(int id, [FromBody]Student s)
+        {
+            StudentRepository.GetInstance().Update(id, s);
+        }
 
 
 
+        // POST api/GoodStudent, to create a new student
+        [Route("")]
+        public HttpResponseMessage Post([FromBody]Student s)
+        {
+            var result = StudentRepository.GetInstance().Add(s);
+            if (result != null)
+            {
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created);
+                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { controller = "Student", id = s.Id }));
+                return response;
+            }
+            else
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "cannot create a new course");
+            }
+
+        }
 
 
 

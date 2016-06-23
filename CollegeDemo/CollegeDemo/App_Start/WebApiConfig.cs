@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
+using CollegeDemo.Filter;
 
 namespace CollegeDemo
 {
@@ -25,6 +26,9 @@ namespace CollegeDemo
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            //this will apply https requirement to all APIs in this site.
+            // config.Filters.Add(new RequireHttpsAttribute());
         }
     }
 }
