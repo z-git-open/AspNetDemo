@@ -18,6 +18,8 @@ namespace CollegeDemo.Models
         public int Salary { get; set; }
 
         public string Gender { get; set; }
+
+        public ICollection<LinkModel> Links { get; set; }
     }
 
 
