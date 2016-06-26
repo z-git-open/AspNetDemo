@@ -21,7 +21,7 @@ namespace CollegeDemo.Controllers
             IEnumerable<Student> students = StudentRepository.GetInstance().GetAll();
 
             var result = students.Where(x => { return x.Gender.Equals(gender, StringComparison.InvariantCultureIgnoreCase); });
-            
+
             var response = Request.CreateResponse<IEnumerable<Student>>(HttpStatusCode.OK, result);
             return response;
         }
@@ -72,11 +72,7 @@ namespace CollegeDemo.Controllers
         }
 
 
-
-
-
         // DELETE api/GoodStudent/5, to delete student 5
-        
         [Route("{id:int}")]
         public void Delete(int id)
         {
@@ -110,12 +106,6 @@ namespace CollegeDemo.Controllers
             }
 
         }
-
-
-
-
-
-
 
     }
 }
