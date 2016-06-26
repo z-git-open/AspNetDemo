@@ -14,5 +14,6 @@ namespace OpenWeather.Controllers
 
             return View();
         }
+       
     }
 }
