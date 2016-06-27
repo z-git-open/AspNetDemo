@@ -164,6 +164,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\OpenWeatherModel.cs" />
+    <Compile Include="Models\WeatherModelByCityName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -215,7 +216,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Weather\Moscow.cshtml" />
+    <Content Include="Views\Weather\City.cshtml" />
+    <Content Include="Views\Weather\Location.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

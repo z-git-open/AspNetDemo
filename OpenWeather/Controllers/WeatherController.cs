@@ -14,19 +14,16 @@ namespace OpenWeather.Controllers
             return "Testing Weather Controller, Current Time: " + DateTime.Now.ToString();
         }
 
-        public ActionResult Moscow()
+        public ActionResult City(string name)
         {
-            var weather = OpenWeatherWebClient.GetWeather(524901);
-
+            var weather = OpenWeatherWebClient.GetWeather(name);
             return View(weather);
-            
         }
 
-
-        // GET: Weather
-        public ActionResult Index()
+        public ActionResult Location(string name)
         {
-            return View();
+            var weather = OpenWeatherWebClient.GetWeather(name);
+            return View(weather);
         }
 
     }

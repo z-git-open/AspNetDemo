@@ -13,11 +13,24 @@ namespace OpenWeather
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
+               name: "Default",
+               url: "weather/{action}",
+               defaults: new { controller = "Weather", action = "Test", id = UrlParameter.Optional }
+           );
+
+            routes.MapRoute(
+               name: "Location",
+               url: "weather/Location/{name}",
+               defaults: new { controller = "Weather", action = "Location"}
+           );
+
+            //routes.MapRoute(
+            //    name: "Default",
+            //    url: "{controller}/{action}/{id}",
+            //    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            //);
         }
     }
 }

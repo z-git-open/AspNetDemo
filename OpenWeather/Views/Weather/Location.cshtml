@@ -1,0 +1,11 @@
+﻿@model OpenWeather.Models.ByCityName.RootObject
+@{
+    ViewBag.Title = "By Location";
+}
+
+<h2>Location Weather</h2>
+Name: @Model.name; CityId: @Model.id; <br />
+Temp: @Model.main.temp; Pressure: @Model.main.pressure <br />
+WindSpeed: @Model.wind.speed; WindDegree: @Model.wind.deg; <br />
+Clouds: @Model.clouds.all;
+
